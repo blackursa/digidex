@@ -1,0 +1,193 @@
+{
+  "configs": [
+    {
+      "automock": false,
+      "cache": true,
+      "cacheDirectory": "C:\\Users\\ABlack\\AppData\\Local\\Temp\\jest",
+      "clearMocks": false,
+      "collectCoverageFrom": [
+        "src/**/*.{ts,tsx}",
+        "!src/**/*.d.ts",
+        "!src/types/**",
+        "!src/__tests__/**"
+      ],
+      "coverageDirectory": "C:\\Users\\ABlack\\CascadeProjects\\digidex\\coverage",
+      "coveragePathIgnorePatterns": [
+        "\\\\node_modules\\\\"
+      ],
+      "cwd": "C:\\Users\\ABlack\\CascadeProjects\\digidex",
+      "detectLeaks": false,
+      "detectOpenHandles": false,
+      "errorOnDeprecated": false,
+      "extensionsToTreatAsEsm": [],
+      "fakeTimers": {
+        "enableGlobally": false
+      },
+      "forceCoverageMatch": [],
+      "globals": {},
+      "haste": {
+        "defaultPlatform": "ios",
+        "platforms": [
+          "android",
+          "ios",
+          "native"
+        ]
+      },
+      "id": "1311a2874b645db5f1757b4d353a35d4",
+      "injectGlobals": true,
+      "moduleDirectories": [
+        "node_modules"
+      ],
+      "moduleFileExtensions": [
+        "ts",
+        "tsx",
+        "js",
+        "jsx"
+      ],
+      "moduleNameMapper": [],
+      "modulePathIgnorePatterns": [],
+      "openHandlesTimeout": 1000,
+      "prettierPath": "prettier",
+      "resetMocks": false,
+      "resetModules": false,
+      "restoreMocks": false,
+      "rootDir": "C:\\Users\\ABlack\\CascadeProjects\\digidex",
+      "roots": [
+        "C:\\Users\\ABlack\\CascadeProjects\\digidex"
+      ],
+      "runner": "C:\\Users\\ABlack\\CascadeProjects\\digidex\\node_modules\\jest-runner\\build\\index.js",
+      "sandboxInjectedGlobals": [],
+      "setupFiles": [
+        "C:\\Users\\ABlack\\CascadeProjects\\digidex\\node_modules\\react-native\\jest\\setup.js",
+        "C:\\Users\\ABlack\\CascadeProjects\\digidex\\node_modules\\jest-expo\\src\\preset\\setup.js",
+        "C:\\Users\\ABlack\\CascadeProjects\\digidex\\src\\setupTests.ts",
+        "C:\\Users\\ABlack\\CascadeProjects\\digidex\\src\\__tests__\\setup\\setupTests.ts"
+      ],
+      "setupFilesAfterEnv": [],
+      "skipFilter": false,
+      "slowTestThreshold": 5,
+      "snapshotFormat": {
+        "escapeString": false,
+        "printBasicPrototype": false
+      },
+      "snapshotSerializers": [],
+      "testEnvironment": "C:\\Users\\ABlack\\CascadeProjects\\digidex\\node_modules\\jest-environment-jsdom\\build\\index.js",
+      "testEnvironmentOptions": {},
+      "testLocationInResults": false,
+      "testMatch": [
+        "**/__tests__/**/*.test.[jt]s?(x)"
+      ],
+      "testPathIgnorePatterns": [
+        "\\\\node_modules\\\\"
+      ],
+      "testRegex": [],
+      "testRunner": "C:\\Users\\ABlack\\CascadeProjects\\digidex\\node_modules\\jest-circus\\runner.js",
+      "transform": [
+        [
+          "^.+\\.(js|ts|tsx)$",
+          "C:\\Users\\ABlack\\CascadeProjects\\digidex\\node_modules\\babel-jest\\build\\index.js",
+          {}
+        ],
+        [
+          "^.+\\.(bmp|gif|jpg|jpeg|mp4|png|psd|svg|webp|ttf|otf|m4v|mov|mp4|mpeg|mpg|webm|aac|aiff|caf|m4a|mp3|wav|html|pdf|obj)$",
+          "C:\\Users\\ABlack\\CascadeProjects\\digidex\\node_modules\\jest-expo\\src\\preset\\assetFileTransformer.js",
+          {}
+        ]
+      ],
+      "transformIgnorePatterns": [
+        "node_modules\\\\(?!(jest-)?react-native|@react-native|expo|@expo|@expo-google-fonts|react-navigation|@react-navigation)\\\\"
+      ],
+      "watchPathIgnorePatterns": []
+    }
+  ],
+  "globalConfig": {
+    "bail": 0,
+    "changedFilesWithAncestor": false,
+    "ci": false,
+    "collectCoverage": false,
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/**/*.d.ts",
+      "!src/types/**",
+      "!src/__tests__/**"
+    ],
+    "coverageDirectory": "C:\\Users\\ABlack\\CascadeProjects\\digidex\\coverage",
+    "coverageProvider": "babel",
+    "coverageReporters": [
+      "json",
+      "text",
+      "lcov",
+      "clover"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 70,
+        "functions": 70,
+        "lines": 70,
+        "statements": 70
+      }
+    },
+    "detectLeaks": false,
+    "detectOpenHandles": false,
+    "errorOnDeprecated": false,
+    "expand": false,
+    "findRelatedTests": false,
+    "forceExit": false,
+    "json": false,
+    "lastCommit": false,
+    "listTests": false,
+    "logHeapUsage": false,
+    "maxConcurrency": 5,
+    "maxWorkers": 19,
+    "noStackTrace": false,
+    "nonFlagArgs": [
+      "src/components/__tests__/QRCodeDisplay.snapshot.test.tsx"
+    ],
+    "notify": false,
+    "notifyMode": "failure-change",
+    "onlyChanged": false,
+    "onlyFailures": false,
+    "openHandlesTimeout": 1000,
+    "passWithNoTests": false,
+    "projects": [],
+    "reporters": [
+      [
+        "default",
+        {}
+      ],
+      [
+        "C:\\Users\\ABlack\\CascadeProjects\\digidex\\src\\__tests__\\setup\\customReporter.js",
+        {}
+      ]
+    ],
+    "rootDir": "C:\\Users\\ABlack\\CascadeProjects\\digidex",
+    "runTestsByPath": false,
+    "seed": -2063898373,
+    "silent": false,
+    "skipFilter": false,
+    "snapshotFormat": {
+      "escapeString": false,
+      "printBasicPrototype": false
+    },
+    "testFailureExitCode": 1,
+    "testPathPattern": "src\\\\components\\\\__tests__\\\\QRCodeDisplay.snapshot.test.tsx",
+    "testSequencer": "C:\\Users\\ABlack\\CascadeProjects\\digidex\\node_modules\\@jest\\test-sequencer\\build\\index.js",
+    "updateSnapshot": "new",
+    "useStderr": false,
+    "verbose": true,
+    "watch": false,
+    "watchAll": false,
+    "watchman": true,
+    "workerThreads": false
+  },
+  "version": "29.7.0"
+}
+TypeError: An error occurred while adding the reporter at path "C:\Users\ABlack\CascadeProjects\digidex\src\__tests__\setup\customReporter.js".
+Reporter is not a constructor
+    at TestScheduler._addCustomReporter (C:\Users\ABlack\CascadeProjects\digidex\node_modules\@jest\core\build\TestScheduler.js:390:9)
+    at async TestScheduler._setupReporters (C:\Users\ABlack\CascadeProjects\digidex\node_modules\@jest\core\build\TestScheduler.js:367:11)
+    at async createTestScheduler (C:\Users\ABlack\CascadeProjects\digidex\node_modules\@jest\core\build\TestScheduler.js:86:3)
+    at async runJest (C:\Users\ABlack\CascadeProjects\digidex\node_modules\@jest\core\build\runJest.js:353:21)
+    at async _run10000 (C:\Users\ABlack\CascadeProjects\digidex\node_modules\@jest\core\build\cli\index.js:343:7)
+    at async runCLI (C:\Users\ABlack\CascadeProjects\digidex\node_modules\@jest\core\build\cli\index.js:198:3)
+    at async Object.run (C:\Users\ABlack\CascadeProjects\digidex\node_modules\jest-cli\build\run.js:130:37)

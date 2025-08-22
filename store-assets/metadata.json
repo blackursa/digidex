@@ -1,0 +1,46 @@
+{
+  "appName": "DigiDex",
+  "category": "Business",
+  "subcategory": "Productivity",
+  "requiredAssets": {
+    "ios": {
+      "screenshots": {
+        "6.5": ["iPhone 13 Pro Max", "2778x1284"],
+        "5.5": ["iPhone 8 Plus", "2208x1242"],
+        "12.9": ["iPad Pro", "2732x2048"]
+      },
+      "icon": {
+        "appIcon": "1024x1024",
+        "spotlight": "120x120",
+        "settings": "87x87"
+      }
+    },
+    "android": {
+      "screenshots": {
+        "phone": ["1080x1920", "2400x1080"],
+        "tablet": ["2732x2048"]
+      },
+      "icon": {
+        "playStore": "512x512",
+        "adaptive": {
+          "foreground": "432x432",
+          "background": "432x432"
+        }
+      }
+    }
+  },
+  "keywords": [
+    "business card",
+    "scanner",
+    "ocr",
+    "contacts",
+    "networking",
+    "organization",
+    "productivity",
+    "offline",
+    "export"
+  ],
+  "privacyPolicyUrl": "https://digidex.app/privacy",
+  "supportUrl": "https://digidex.app/support",
+  "marketingUrl": "https://digidex.app"
+}
