@@ -14,9 +14,9 @@ jobs:
     steps:
       - name: Checkout
         run: |
-          git clone https://github.com/${{ github.repository }}.git .
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git clone https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git .
+          git config --global user.name github-actions[bot]
+          git config --global user.email github-actions[bot]@users.noreply.github.com
       - name: Setup Node
         run: |
           curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
@@ -27,10 +27,8 @@ jobs:
         run: npx expo export:web
       - name: Deploy
         run: |
-          git checkout --orphan gh-pages
-          git rm -rf .
-          mv web-build/* .
-          rm -rf web-build
-          git add .
+          cd web-build
+          git init
+          git add -A
           git commit -m "Deploy to GitHub Pages"
-          git push -f origin gh-pages
+          git push -f https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:gh-pages
