@@ -12,26 +12,22 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        run: git clone https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git .
-      - name: Setup Node
-        run: |
-          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-          . ~/.nvm/nvm.sh
-          nvm install 18
-          nvm use 18
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+      - uses: actions/setup-node@2fddd8803e2f5c9604345a0b591c3020ee971a93
+        with:
+          node-version: '18'
       - name: Build
         run: |
           npm ci
           npx expo export:web
       - name: Deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git checkout --orphan gh-pages
-          git rm -rf .
-          mv web-build/* .
-          rm -rf web-build
+          cd web-build
+          git init
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
           git add .
           git commit -m "Deploy to GitHub Pages"
-          git push -f origin gh-pages
+          git push --force "https://${{ github.actor }}:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git" master:gh-pages
