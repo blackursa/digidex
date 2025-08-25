@@ -12,30 +12,29 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Clone repository
-        run: git clone https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git .
-      - name: Setup Git
+      - name: Setup repository
         run: |
-          git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git init
+          git remote add origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git fetch
+          git checkout master
       - name: Setup Node.js
         run: |
-          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-          export NVM_DIR="$HOME/.nvm"
-          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-          nvm install 18
-          nvm use 18
-      - name: Install dependencies
-        run: npm ci
+          sudo apt-get update
+          sudo apt-get install -y nodejs npm
       - name: Build
-        run: npx expo export:web
+        run: |
+          npm ci
+          npx expo export:web
       - name: Deploy
         run: |
           git checkout --orphan gh-pages
           git rm -rf .
-          cp -r web-build/* .
+          mv web-build/* .
           rm -rf web-build
           touch .nojekyll
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
           git add .
           git commit -m "Deploy to GitHub Pages"
           git push -f origin gh-pages
