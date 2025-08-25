@@ -9,34 +9,33 @@ permissions:
   contents: write
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Clone repository
+        run: git clone https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git .
+      - name: Setup Git
         run: |
-          git clone https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git .
-          git config --global user.name "${GITHUB_ACTOR}"
-          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Setup Node
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+      - name: Setup Node.js
         run: |
           curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-          . ~/.nvm/nvm.sh
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           nvm install 18
           nvm use 18
+      - name: Install dependencies
+        run: npm ci
       - name: Build
-        run: |
-          npm ci
-          npx expo export:web
+        run: npx expo export:web
       - name: Deploy
         run: |
           git checkout --orphan gh-pages
           git rm -rf .
-          mv web-build/* .
+          cp -r web-build/* .
           rm -rf web-build
+          touch .nojekyll
           git add .
           git commit -m "Deploy to GitHub Pages"
           git push -f origin gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
