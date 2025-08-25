@@ -12,11 +12,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Setup Git
         run: |
-          git clone https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git .
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+      - name: Clone repository
+        run: git clone https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git .
       - name: Setup Node.js
         run: |
           sudo apt-get update
@@ -30,9 +31,11 @@ jobs:
           npx expo export:web
       - name: Deploy
         run: |
-          cd web-build
-          git init
+          git checkout --orphan gh-pages
+          git rm -rf .
+          mv web-build/* .
+          rm -rf web-build
+          touch .nojekyll
           git add .
           git commit -m "Deploy to GitHub Pages"
-          git branch -M gh-pages
-          git push -f https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages
+          git push -f origin gh-pages
