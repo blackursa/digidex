@@ -12,29 +12,27 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup repository
+      - name: Checkout
         run: |
-          git init
-          git remote add origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          git fetch
-          git checkout master
+          git clone https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git .
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
       - name: Setup Node.js
         run: |
           sudo apt-get update
           sudo apt-get install -y nodejs npm
+          sudo npm install -g n
+          sudo n 18
+          hash -r
       - name: Build
         run: |
           npm ci
           npx expo export:web
       - name: Deploy
         run: |
-          git checkout --orphan gh-pages
-          git rm -rf .
-          mv web-build/* .
-          rm -rf web-build
-          touch .nojekyll
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
+          cd web-build
+          git init
           git add .
           git commit -m "Deploy to GitHub Pages"
-          git push -f origin gh-pages
+          git branch -M gh-pages
+          git push -f https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages
