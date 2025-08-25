@@ -9,26 +9,29 @@ permissions:
   contents: write
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        run: |
-          git clone https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git .
-          git config --global user.name github-actions[bot]
-          git config --global user.email github-actions[bot]@users.noreply.github.com
+        run: git clone https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git .
       - name: Setup Node
         run: |
-          curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-          sudo apt-get install -y nodejs
-      - name: Install dependencies
-        run: npm ci
+          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+          . ~/.nvm/nvm.sh
+          nvm install 18
+          nvm use 18
       - name: Build
-        run: npx expo export:web
+        run: |
+          npm ci
+          npx expo export:web
       - name: Deploy
         run: |
-          cd web-build
-          git init
-          git add -A
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git checkout --orphan gh-pages
+          git rm -rf .
+          mv web-build/* .
+          rm -rf web-build
+          git add .
           git commit -m "Deploy to GitHub Pages"
-          git push -f https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:gh-pages
+          git push -f origin gh-pages
