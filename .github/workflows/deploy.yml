@@ -9,21 +9,18 @@ permissions:
   contents: write
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
-      - name: Setup Node
-        uses: actions/setup-node@2fddd8803e2f5c9604345a0b591c3020ee971a93 # v3.4.1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
           node-version: '18'
-          cache: 'npm'
-      - name: Install
-        run: npm ci
-      - name: Build
-        run: npx expo export:web
+      - run: |
+          npm ci
+          npx expo export:web
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@0f24da7de3da0acc4af912085c6c54ff499f8e92 # v4.4.1
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          folder: web-build
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: web-build
